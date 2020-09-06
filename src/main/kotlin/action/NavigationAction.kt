@@ -14,7 +14,8 @@ class NavigationAction(private val navigator: Navigator, val fileNameService: Fi
                 fileNameService.toImplementationFileNameWithExtension(nameWithoutExtension)
             navigator.navigateTo(e.project!!, implementationFileWithExtension)
         } else {
-            navigator.navigateTo(e.project!!, "anImplementation.test.js")
+            val fileNameWithExtension = fileNameService.toTestFileNameWithExtension(nameWithoutExtension)
+            navigator.navigateTo(e.project!!, fileNameWithExtension)
         }
 
     }
