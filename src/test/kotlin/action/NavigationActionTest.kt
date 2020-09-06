@@ -1,5 +1,6 @@
 package action
 
+import com.intellij.mock.MockProjectEx
 import com.intellij.mock.MockVirtualFile
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -17,17 +18,20 @@ class NavigationActionTest {
         inner class WhenTheCurrentFileIsAImplementationFile {
             @Test
             fun `it opens the related test file for the file`() {
+                val mockProjectEx = MockProjectEx { }
+
                 val e = mockk<AnActionEvent>()
                 every {
                     e.getData(PlatformDataKeys.VIRTUAL_FILE)
                 } returns MockVirtualFile("anImplementation.tsx")
+                every { e.project } returns mockProjectEx
 
                 val navigator = spyk<Navigator>()
 
                 val testNavigationAction = NavigationAction(navigator)
                 testNavigationAction.goToTestOrImplementation(e)
 
-                verify { navigator.navigateTo("anImplementation.test.js") }
+                verify { navigator.navigateTo(mockProjectEx, "anImplementation.test.js") }
             }
         }
     }

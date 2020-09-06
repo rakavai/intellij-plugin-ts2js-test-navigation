@@ -4,6 +4,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 
 class NavigationAction(private val navigator: Navigator) {
     fun goToTestOrImplementation(e: AnActionEvent) {
-        navigator.navigateTo("anImplementation.test.js")
+        navigator.navigateTo(e.project!!, "anImplementation.test.js")
     }
 }
