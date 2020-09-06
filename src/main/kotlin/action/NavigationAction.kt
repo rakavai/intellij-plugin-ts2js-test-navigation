@@ -1,5 +1,6 @@
 package action
 
+import action.intellij.Navigator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys.VIRTUAL_FILE
 

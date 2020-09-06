@@ -8,13 +8,16 @@ import kotlin.test.assertEquals
 internal class FileNameServiceTest {
     @Nested
     inner class TestToImplementationFileNameWithExtension {
-        @Test
-        fun `it change test file without extension to tsx implementation file`() {
-            val fileNameService = FileNameService()
-            val actual =
-                fileNameService.toImplementationFileNameWithExtension(MockProjectEx{}, "AFile.test")
+        @Nested
+        inner class WhenThreeIsATSXFileForTestFile{
+            @Test
+            fun `it change test file without extension to tsx implementation file`() {
+                val fileNameService = FileNameService()
+                val actual =
+                    fileNameService.toImplementationFileNameWithExtension(MockProjectEx{}, "AFile.test")
 
-            assertEquals("AFile.tsx", actual)
+                assertEquals("AFile.tsx", actual)
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package action
 
+import action.intellij.Navigator
 import com.intellij.mock.MockProjectEx
 import com.intellij.mock.MockVirtualFile
 import com.intellij.openapi.actionSystem.AnActionEvent
