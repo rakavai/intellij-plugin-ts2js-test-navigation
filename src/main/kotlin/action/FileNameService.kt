@@ -1,7 +1,5 @@
 package action
 
-import org.jetbrains.annotations.NotNull
-
 class FileNameService {
     fun toImplementationFileNameWithExtension(nameWithoutExtension: String): String {
         val (onlyName) = Regex("(.+)\\.test").find(nameWithoutExtension)!!.destructured
@@ -9,6 +7,6 @@ class FileNameService {
     }
 
     fun toTestFileNameWithExtension(nameWithoutExtension: String): String {
-        return "anImplementation.test.js"
+        return "$nameWithoutExtension.test.js"
     }
 }
