@@ -1,12 +1,11 @@
 <idea-plugin>
-    <id>org.example.ts-test-navigation</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <id>com.rakibul_hasan.ts-test-navigation</id>
+    <name>Test Navigation TS to JS Test</name>
+    <vendor email="r@kibul-hasan.com">Raka Vai</vendor>
 
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-    ]]></description>
+    <description>
+        TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+    </description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -18,5 +17,9 @@
 
     <actions>
         <!-- Add your actions here -->
+        <action id="action.Main" class="action.Main" text="Test&lt;-&gt;Implementation">
+            <add-to-group group-id="MainMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta T"/>
+        </action>
     </actions>
 </idea-plugin>
