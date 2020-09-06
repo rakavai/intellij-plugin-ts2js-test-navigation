@@ -1,6 +1,6 @@
 package action
 
-import action.intellij.Navigator
+import action.intellij.IntellijService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 
@@ -11,8 +11,8 @@ class Main: AnAction() {
 }
 
 private object Action {
-    val navigator = Navigator()
-    val navigationAction = NavigationAction(navigator, FileNameService())
+    val intellijService = IntellijService()
+    val navigationAction = NavigationAction(intellijService, FileNameService())
 
     fun goToTestOrImplementation(e: AnActionEvent) {
         navigationAction.goToTestOrImplementation(e)

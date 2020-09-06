@@ -1,6 +1,6 @@
 package action
 
-import action.intellij.Navigator
+import action.intellij.IntellijService
 import com.intellij.mock.MockProjectEx
 import com.intellij.mock.MockVirtualFile
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -18,7 +18,7 @@ class NavigationActionTest {
         inner class WhenTheCurrentFileIsAImplementationFile {
             @Test
             fun `it opens the related test file for the file`() {
-                val navigator = mockk<Navigator>(relaxed = true)
+                val navigator = mockk<IntellijService>(relaxed = true)
                 val testNavigationAction = NavigationAction(navigator, FileNameService())
                 val mockProjectEx = MockProjectEx { }
 
@@ -40,7 +40,7 @@ class NavigationActionTest {
                     fileNameService.toImplementationFileNameWithExtension(mockProjectEx,"aTestFile.test")
                 } returns "aTestFile.tsx"
 
-                val navigator = mockk<Navigator>(relaxed = true)
+                val navigator = mockk<IntellijService>(relaxed = true)
 
                 val testNavigationAction = NavigationAction(navigator, fileNameService)
                 testNavigationAction.goToTestOrImplementation(
