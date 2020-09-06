@@ -1,5 +1,6 @@
 package action
 
+import action.intellij.IntellijService
 import com.intellij.mock.MockProjectEx
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -12,7 +13,7 @@ internal class FileNameServiceTest {
         inner class WhenThreeIsATSXFileForTestFile{
             @Test
             fun `it change test file without extension to tsx implementation file`() {
-                val fileNameService = FileNameService()
+                val fileNameService = FileNameService(IntellijService())
                 val actual =
                     fileNameService.toImplementationFileNameWithExtension(MockProjectEx{}, "AFile.test")
 
@@ -25,7 +26,7 @@ internal class FileNameServiceTest {
     inner class TestToTestFileNameWithExtension {
         @Test
         fun `it change implementation file without extension to test file`() {
-            val fileNameService = FileNameService()
+            val fileNameService = FileNameService(IntellijService())
             val actual =
                 fileNameService.toTestFileNameWithExtension("AFile")
 

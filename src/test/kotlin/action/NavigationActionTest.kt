@@ -19,7 +19,7 @@ class NavigationActionTest {
             @Test
             fun `it opens the related test file for the file`() {
                 val navigator = mockk<IntellijService>(relaxed = true)
-                val testNavigationAction = NavigationAction(navigator, FileNameService())
+                val testNavigationAction = NavigationAction(navigator, FileNameService(IntellijService()))
                 val mockProjectEx = MockProjectEx { }
 
                 val e = mockActionEvent("anImplementation.tsx", mockProjectEx)

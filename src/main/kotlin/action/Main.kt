@@ -12,7 +12,8 @@ class Main: AnAction() {
 
 private object Action {
     val intellijService = IntellijService()
-    val navigationAction = NavigationAction(intellijService, FileNameService())
+    val fileNameService = FileNameService(intellijService)
+    val navigationAction = NavigationAction(intellijService, fileNameService)
 
     fun goToTestOrImplementation(e: AnActionEvent) {
         navigationAction.goToTestOrImplementation(e)
