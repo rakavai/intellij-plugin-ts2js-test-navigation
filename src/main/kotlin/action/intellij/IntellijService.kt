@@ -20,6 +20,11 @@ class IntellijService {
     fun getFirstVirtualFile(project: Project, fileName: String): VirtualFile? {
         val virtualFilesByName =
             getVirtualFilesByName(project, fileName, projectScope(project))
-        return virtualFilesByName.iterator().next()
+
+        val iterator = virtualFilesByName.iterator()
+        if(iterator.hasNext()){
+            return iterator.next()
+        }
+        return null
     }
 }
