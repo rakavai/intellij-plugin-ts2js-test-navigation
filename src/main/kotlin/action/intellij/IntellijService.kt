@@ -2,14 +2,24 @@ package action.intellij
 
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.FilenameIndex.getVirtualFilesByName
 import com.intellij.psi.search.GlobalSearchScope.projectScope
 
 class IntellijService {
     fun navigateTo(project: Project, fileName: String) {
-        val virtualFilesByName = getVirtualFilesByName(project, fileName, projectScope(project))
-        val firstVirtualFile = virtualFilesByName.iterator().next()
-        val descriptor = OpenFileDescriptor(project, firstVirtualFile)
+        val firstVirtualFile = getFirstVirtualFile(project, fileName)
+        navigateTo(project, firstVirtualFile)
+    }
+
+    private fun navigateTo(project: Project, firstVirtualFile: VirtualFile?) {
+        val descriptor = OpenFileDescriptor(project, firstVirtualFile!!)
         descriptor.navigate(true)
+    }
+
+    private fun getFirstVirtualFile(project: Project, fileName: String): VirtualFile? {
+        val virtualFilesByName =
+            getVirtualFilesByName(project, fileName, projectScope(project))
+        return virtualFilesByName.iterator().next()
     }
 }
