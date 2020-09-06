@@ -18,21 +18,39 @@ class NavigationActionTest {
         inner class WhenTheCurrentFileIsAImplementationFile {
             @Test
             fun `it opens the related test file for the file`() {
+                val navigator = mockk<Navigator>(relaxed = true)
+                val testNavigationAction = NavigationAction(navigator)
                 val mockProjectEx = MockProjectEx { }
 
-                val e = mockk<AnActionEvent>()
-                every {
-                    e.getData(PlatformDataKeys.VIRTUAL_FILE)
-                } returns MockVirtualFile("anImplementation.tsx")
-                every { e.project } returns mockProjectEx
-
-                val navigator = spyk<Navigator>()
-
-                val testNavigationAction = NavigationAction(navigator)
+                val e = mockActionEvent("anImplementation.tsx", mockProjectEx)
                 testNavigationAction.goToTestOrImplementation(e)
 
                 verify { navigator.navigateTo(mockProjectEx, "anImplementation.test.js") }
             }
         }
+
+        @Nested
+        inner class WhenTheCurrentFileIsATestFile {
+            @Test
+            fun `it opens the related implementation file for the test`() {
+                val navigator = mockk<Navigator>(relaxed = true)
+                val testNavigationAction = NavigationAction(navigator)
+                val mockProjectEx = MockProjectEx { }
+
+                val e = mockActionEvent("aTestFile.test.js", mockProjectEx)
+                testNavigationAction.goToTestOrImplementation(e)
+
+                verify { navigator.navigateTo(mockProjectEx, "aTestFile.tsx") }
+            }
+        }
+    }
+
+    private fun mockActionEvent(fileName: String, mockProjectEx: MockProjectEx): AnActionEvent {
+        val e = mockk<AnActionEvent>()
+        every {
+            e.getData(PlatformDataKeys.VIRTUAL_FILE)
+        } returns MockVirtualFile(fileName)
+        every { e.project } returns mockProjectEx
+        return e
     }
 }
