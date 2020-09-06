@@ -30,6 +30,25 @@ internal class FileNameServiceTest {
                 assertEquals("AFile.tsx", actual)
             }
         }
+
+        @Nested
+        inner class WhenThreeIsNoTSXFileForTestFile {
+            @Test
+            fun `it change test file without extension to TS implementation file`() {
+                val stubbedProject = MockProjectEx {}
+
+                val intellijService = mockk<IntellijService>()
+                every {
+                    intellijService.getFirstVirtualFile(stubbedProject, "AFile.tsx")
+                } returns null
+
+                val fileNameService = FileNameService(intellijService)
+                val actual =
+                    fileNameService.toImplementationFileNameWithExtension(stubbedProject, "AFile.test")
+
+                assertEquals("AFile.ts", actual)
+            }
+        }
     }
 
     @Nested

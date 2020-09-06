@@ -17,7 +17,7 @@ class IntellijService {
         descriptor.navigate(true)
     }
 
-    public fun getFirstVirtualFile(project: Project, fileName: String): VirtualFile? {
+    fun getFirstVirtualFile(project: Project, fileName: String): VirtualFile? {
         val virtualFilesByName =
             getVirtualFilesByName(project, fileName, projectScope(project))
         return virtualFilesByName.iterator().next()
