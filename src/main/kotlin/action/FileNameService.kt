@@ -1,7 +1,9 @@
 package action
 
+import com.intellij.openapi.project.Project
+
 class FileNameService {
-    fun toImplementationFileNameWithExtension(nameWithoutExtension: String): String {
+    fun toImplementationFileNameWithExtension(project: Project, nameWithoutExtension: String): String {
         val (onlyName) = Regex("(.+)\\.test").find(nameWithoutExtension)!!.destructured
         return "$onlyName.tsx"
     }

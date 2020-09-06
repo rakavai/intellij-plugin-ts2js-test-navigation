@@ -32,12 +32,19 @@ class NavigationActionTest {
         inner class WhenTheCurrentFileIsATestFile {
             @Test
             fun `it opens the related implementation file for the test`() {
-                val navigator = mockk<Navigator>(relaxed = true)
-                val testNavigationAction = NavigationAction(navigator, FileNameService())
                 val mockProjectEx = MockProjectEx { }
 
-                val e = mockActionEvent("aTestFile.test.js", mockProjectEx)
-                testNavigationAction.goToTestOrImplementation(e)
+                val fileNameService = mockk<FileNameService>()
+                every {
+                    fileNameService.toImplementationFileNameWithExtension(mockProjectEx,"aTestFile.test")
+                } returns "aTestFile.tsx"
+
+                val navigator = mockk<Navigator>(relaxed = true)
+
+                val testNavigationAction = NavigationAction(navigator, fileNameService)
+                testNavigationAction.goToTestOrImplementation(
+                    mockActionEvent("aTestFile.test.js", mockProjectEx)
+                )
 
                 verify { navigator.navigateTo(mockProjectEx, "aTestFile.tsx") }
             }

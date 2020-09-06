@@ -1,5 +1,6 @@
 package action
 
+import com.intellij.mock.MockProjectEx
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -11,7 +12,7 @@ internal class FileNameServiceTest {
         fun `it change test file without extension to tsx implementation file`() {
             val fileNameService = FileNameService()
             val actual =
-                fileNameService.toImplementationFileNameWithExtension("AFile.test")
+                fileNameService.toImplementationFileNameWithExtension(MockProjectEx{}, "AFile.test")
 
             assertEquals("AFile.tsx", actual)
         }

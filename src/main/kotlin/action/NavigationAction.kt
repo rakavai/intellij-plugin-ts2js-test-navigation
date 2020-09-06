@@ -2,7 +2,6 @@ package action
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys.VIRTUAL_FILE
-import org.jetbrains.annotations.NotNull
 
 class NavigationAction(private val navigator: Navigator, val fileNameService: FileNameService) {
     fun goToTestOrImplementation(e: AnActionEvent) {
@@ -11,16 +10,12 @@ class NavigationAction(private val navigator: Navigator, val fileNameService: Fi
 
         if (nameWithoutExtension?.contains(".test")!!) {
             val implementationFileWithExtension =
-                fileNameService.toImplementationFileNameWithExtension(nameWithoutExtension)
+                fileNameService.toImplementationFileNameWithExtension(e.project!!, nameWithoutExtension)
             navigator.navigateTo(e.project!!, implementationFileWithExtension)
         } else {
             val fileNameWithExtension = fileNameService.toTestFileNameWithExtension(nameWithoutExtension)
             navigator.navigateTo(e.project!!, fileNameWithExtension)
         }
 
-    }
-
-    private fun testFileNameToImplementationFileNameWithoutExtension(nameWithoutExtension: @NotNull String?): String {
-        return "aTestFile.tsx"
     }
 }
