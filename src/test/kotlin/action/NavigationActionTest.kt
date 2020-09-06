@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.spyk
 import io.mockk.verify
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -19,7 +18,7 @@ class NavigationActionTest {
             @Test
             fun `it opens the related test file for the file`() {
                 val navigator = mockk<Navigator>(relaxed = true)
-                val testNavigationAction = NavigationAction(navigator)
+                val testNavigationAction = NavigationAction(navigator, FileNameService())
                 val mockProjectEx = MockProjectEx { }
 
                 val e = mockActionEvent("anImplementation.tsx", mockProjectEx)
@@ -34,7 +33,7 @@ class NavigationActionTest {
             @Test
             fun `it opens the related implementation file for the test`() {
                 val navigator = mockk<Navigator>(relaxed = true)
-                val testNavigationAction = NavigationAction(navigator)
+                val testNavigationAction = NavigationAction(navigator, FileNameService())
                 val mockProjectEx = MockProjectEx { }
 
                 val e = mockActionEvent("aTestFile.test.js", mockProjectEx)

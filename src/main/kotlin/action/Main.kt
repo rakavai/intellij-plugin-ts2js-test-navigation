@@ -11,7 +11,7 @@ class Main: AnAction() {
 
 private object Action {
     val navigator = Navigator()
-    val navigationAction = NavigationAction(navigator)
+    val navigationAction = NavigationAction(navigator, FileNameService())
 
     fun goToTestOrImplementation(e: AnActionEvent) {
         navigationAction.goToTestOrImplementation(e)
