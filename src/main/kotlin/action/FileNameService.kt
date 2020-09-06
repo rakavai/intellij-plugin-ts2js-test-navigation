@@ -3,8 +3,9 @@ package action
 import org.jetbrains.annotations.NotNull
 
 class FileNameService {
-    fun toImplementationFileNameWithExtension(nameWithoutExtension: @NotNull String?): String {
-        return "aTestFile.tsx"
+    fun toImplementationFileNameWithExtension(nameWithoutExtension: String): String {
+        val (onlyName) = Regex("(.+)\\.test").find(nameWithoutExtension)!!.destructured
+        return "$onlyName.tsx"
     }
 
     fun toTestFileNameWithExtension(nameWithoutExtension: String): String {
